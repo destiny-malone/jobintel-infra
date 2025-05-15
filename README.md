@@ -1,9 +1,10 @@
-## Project Summary
+# Project Summary
+
 JobIntel is a fully cloud-native, cert-mapped job application tracker that uses Terraform, AWS, GitHub Actions, and Slack automation to track applications like a production system. [See full breakdown.] (PROJECT_OVERVIEW.md)
 
-# JobIntel-DevOps-Driven Job Tracker Platform
+## JobIntel-DevOps-Driven Job Tracker Platform
 
-**Cloud-Native, DevOps-Powered Job Application Tracker**  
+**Cloud-Native, DevOps-Powered Job Application Tracker**
 _A fully automated, infrastructure-as-code system that helps manage job searches like a real production pipeline._
 
 ---
@@ -13,11 +14,11 @@ _A fully automated, infrastructure-as-code system that helps manage job searches
 JobIntel is a cloud-native project I built while studying for certifications and job hunting remotely. I wanted something more powerful than a spreadsheet or Notion board — I wanted infrastructure, automation, and insights.
 
 This project deploys a job application tracker with:
-- Full Terraform infrastructure
-- Slack integration for logging job events
-- CI/CD pipelines
-- Optional OpenAI intelligence layer for analyzing feedback and rejection patterns
-- Resume version tracking + recruiter-facing S3 resume site
+    - Full Terraform infrastructure
+    - Slack integration for logging job events
+    - CI/CD pipelines
+    - OpenAI intelligence layer for analyzing feedback and rejection patterns
+    - Resume version tracking + recruiter-facing S3 resume site
 
 Every part of the project is mapped to a real certification and career-relevant DevOps skill.
 
@@ -38,9 +39,9 @@ Every part of the project is mapped to a real certification and career-relevant 
 | **Layer**                   | **Tool/Tech Used**                       | **Cert it Maps To**                        | **Status**     |
 |-----------------------------|------------------------------------------|--------------------------------------------|----------------|
 | Infrastructure as Code      | Terraform, AWS (S3, Lambda, IAM)         | Terraform Associate, AWS SA Pro            | [ ] Not Started |
-| Backend API                 | Python (FastAPI or Flask), Boto3         | Python Certification (Optional)            | [ ]            |
+| Backend API                 | Python (FastAPI or Flask), Boto3         | Python Certification             | [ ]            |
 | Automation & Bot Logic      | Slack SDK, Python Scheduler, GitHub Actions | DevOps Core, Python                        | [ ]            |
-| Containerization            | Docker, Kubernetes (optional)            | Docker DCA, CKA                             | [ ]            |
+| Containerization            | Docker, Kubernetes             | Docker DCA, CKA                             | [ ]            |
 | CI/CD Pipelines             | GitHub Actions                           | DevOps Mastery, CI/CD Systems               | [ ]            |
 | Monitoring & Logging        | AWS CloudWatch, IAM Policies             | AWS SA Pro, Cloud Security (Future)        | [ ]            |
 | Intelligence Layer (Bonus)  | OpenAI API, NLP Tagging, Resume Scoring  | AI Curiosity Flex, ML/AI Enthusiast         | [ ]            |
@@ -60,12 +61,12 @@ Every part of the project is mapped to a real certification and career-relevant 
 
 | Certification               | Status        | Date Completed   |
 |-----------------------------|---------------|------------------|
-| Terraform Associate         | [ ] Studying  |                  |
-| Docker Certified Associate  | [ ] Studying  |                  |
-| Kubernetes CKA              | [ ] Planned   |                  |
-| AWS Solutions Architect Pro | [ ] Planned   |                  |
-| Python Certification        | [ ] Optional  |                  |
-| Cloud Security (TBD)        | [ ] Future    |                  |
+| Terraform Associate         | [ ]  |                  |
+| Docker Certified Associate  | [ ]  |                  |
+| Kubernetes CKA              | [ ]   |                  |
+| AWS Solutions Architect Pro | [ ]   |                  |
+| Python Certification        | [ ]   |                  |
+| Cloud Security (TBD)        | [ ]    |                  |
 
 ---
 
@@ -77,18 +78,19 @@ I was studying, building, and applying all at the same time — and this project
 
 ---
 
-## **Repos in This Project**
+## **Repos in JobIntel**
 
 - [`jobintel-infra`](https://github.com/destiny-malone/jobintel-infra) → Terraform IaC
 - [`jobintel-api`](https://github.com/destiny-malone/jobintel-api) → Python backend
 - [`jobintel-bot`](https://github.com/destiny-malone/jobintel-bot) → Slack integration
-- [`jobintel-ui`](https://github.com/destiny-malone/jobintel-ui) → Resume/metrics frontend (optional)
-- [`jobintel-ml`](https://github.com/destiny-malone/jobintel-ml) → NLP/feedback analytics (optional)
+- [`jobintel-ui`](https://github.com/destiny-malone/jobintel-ui) → Resume/metrics frontend
+- [`jobintel-ml`](https://github.com/destiny-malone/jobintel-ml) → NLP/feedback analytics
 - [`jobintel-cicd`](https://github.com/destiny-malone/jobintel-cicd) → GitHub Actions, Terraform CI, Backend auto-deploy workflows
-- [`jobintel-cli`](https://github.com/destiny-malone/jobintel-cli) → Terminal-based app tracker (optional)
-- [`jobintel-docs`](https://github.com/destiny-malone/jobintel-docs) → Project notes, cert writeups, LinkedIn content (optional)
+- [`jobintel-cli`](https://github.com/destiny-malone/jobintel-cli) → Terminal-based app tracker
+- [`jobintel-docs`](https://github.com/destiny-malone/jobintel-docs) → Project notes, cert writeups, LinkedIn content
 
 ---
 
 ## **License**
+
 MIT — Feel free to fork, build, and remix.
