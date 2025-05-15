@@ -9,6 +9,13 @@ _A fully automated, infrastructure-as-code system that helps manage job searches
 
 ---
 
+## Badges
+
+![Terraform CI](https://github.com/destiny-malone/jobintel-infra/actions/workflows/terraform.yml/badge.svg)
+
+
+---
+
 ## **Overview**
 
 JobIntel is a cloud-native project I built while studying for certifications and job hunting remotely. I wanted something more powerful than a spreadsheet or Notion board — I wanted infrastructure, automation, and insights.
