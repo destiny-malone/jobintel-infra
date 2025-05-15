@@ -46,3 +46,8 @@ jobs:
             
             - name: Terraform Validate
               run: terraform validate
+
+
+# Every push to the main branch will trigger this workflow
+# The workflow will run on the latest version of Ubuntu
+#If formatting is not correct, it will fail the workflow
