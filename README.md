@@ -44,7 +44,7 @@ Every part of the project is mapped to a real certification and career-relevant 
 | Containerization            | Docker, Kubernetes             | Docker DCA, CKA                             | [ ]            |
 | CI/CD Pipelines             | GitHub Actions                           | DevOps Mastery, CI/CD Systems               | [ ]            |
 | Monitoring & Logging        | AWS CloudWatch, IAM Policies             | AWS SA Pro, Cloud Security (Future)        | [ ]            |
-| Intelligence Layer (Bonus)  | OpenAI API, NLP Tagging, Resume Scoring  | AI Curiosity Flex, ML/AI Enthusiast         | [ ]            |
+| Intelligence Layer  | OpenAI API, NLP Tagging, Resume Scoring  | AI Curiosity Flex, ML/AI Enthusiast         | [ ]            |
 
 ---
 

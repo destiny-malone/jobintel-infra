@@ -64,6 +64,12 @@ This isn’t a spreadsheet. This is a **DevOps pipeline built to manage your car
     - Add **CloudWatch logs** and **IAM roles**
     - Secure the pipeline with **least privilege IAM policies**
     - Configure **GitHub Actions** to auto-deploy new versions
+    - Implement **Terraform remote state sharing** across JobIntel repos
+    - Use terraform_remote_state in jobintel-api and jobintell-cicd to pull:
+        • bucket_name
+        • bucket_arn
+        • region
+        • DynamoDB table name, Lambda ARNs, etc.
 
 ### Phase 5: Intelligence Layer
 
@@ -85,7 +91,7 @@ This isn’t a spreadsheet. This is a **DevOps pipeline built to manage your car
 | CI/CD Pipelines      | GitHub Actions                   | DevOps Core, GitHub CI/CD best practices  |
 | Backend API          | Python (FastAPI/Flask), Boto3    | Python Cert                     |
 | Monitoring & Logging | CloudWatch, IAM roles            | AWS SA Pro, Cloud Security (future)       |
-| Intelligence Layer   | OpenAI API, NLP                  | Bonus Flex — ML/NLP Curiosity             |
+| Intelligence Layer   | OpenAI API, NLP                  | ML/NLP Curiosity             |
 
 ## WHY IT STANDS OUT
 
