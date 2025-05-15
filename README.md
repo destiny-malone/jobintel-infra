@@ -1,4 +1,7 @@
-# JobIntel
+## Project Summary
+JobIntel is a fully cloud-native, cert-mapped job application tracker that uses Terraform, AWS, GitHub Actions, and Slack automation to track applications like a production system. [See full breakdown.] (PROJECT_OVERVIEW.md)
+
+# JobIntel-DevOps-Driven Job Tracker Platform
 
 **Cloud-Native, DevOps-Powered Job Application Tracker**  
 _A fully automated, infrastructure-as-code system that helps manage job searches like a real production pipeline._
@@ -44,7 +47,7 @@ Every part of the project is mapped to a real certification and career-relevant 
 
 ---
 
-## **Live Features (in progress)**
+## **Live Features**
 
 - [ ] Slack `/logjob` command → logs job to database
 - [ ] Auto-send weekly job hunt stats via email or Slack DM
@@ -76,11 +79,14 @@ I was studying, building, and applying all at the same time — and this project
 
 ## **Repos in This Project**
 
-- [`jobintel-infra`](https://github.com/yourusername/jobintel-infra) → Terraform IaC
-- [`jobintel-api`](https://github.com/yourusername/jobintel-api) → Python backend
-- [`jobintel-bot`](https://github.com/yourusername/jobintel-bot) → Slack integration
-- [`jobintel-ui`](https://github.com/yourusername/jobintel-ui) → Resume/metrics frontend (optional)
-- [`jobintel-ml`](https://github.com/yourusername/jobintel-ml) → NLP/feedback analytics (optional)
+- [`jobintel-infra`](https://github.com/destiny-malone/jobintel-infra) → Terraform IaC
+- [`jobintel-api`](https://github.com/destiny-malone/jobintel-api) → Python backend
+- [`jobintel-bot`](https://github.com/destiny-malone/jobintel-bot) → Slack integration
+- [`jobintel-ui`](https://github.com/destiny-malone/jobintel-ui) → Resume/metrics frontend (optional)
+- [`jobintel-ml`](https://github.com/destiny-malone/jobintel-ml) → NLP/feedback analytics (optional)
+- [`jobintel-cicd`](https://github.com/destiny-malone/jobintel-cicd) → GitHub Actions, Terraform CI, Backend auto-deploy workflows
+- [`jobintel-cli`](https://github.com/destiny-malone/jobintel-cli) → Terminal-based app tracker (optional)
+- [`jobintel-docs`](https://github.com/destiny-malone/jobintel-docs) → Project notes, cert writeups, LinkedIn content (optional)
 
 ---
 
