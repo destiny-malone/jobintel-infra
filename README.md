@@ -11,7 +11,7 @@ _A fully automated, infrastructure-as-code system that helps manage job searches
 
 ## Badges
 
-![Terraform CI](https://github.com/destiny-malone/jobintel-infra/actions/workflows/terraform.yml/badge.svg)
+[![Terraform CI](https://github.com/destiny-malone/jobintel-infra/actions/workflows/terraform.yml/badge.svg)](https://github.com/destiny-malone/jobintel-infra/actions/workflows/terraform.yml)
 
 
 ---
@@ -45,7 +45,7 @@ Every part of the project is mapped to a real certification and career-relevant 
 
 | **Layer**                   | **Tool/Tech Used**                       | **Cert it Maps To**                        | **Status**     |
 |-----------------------------|------------------------------------------|--------------------------------------------|----------------|
-| Infrastructure as Code      | Terraform, AWS (S3, Lambda, IAM)         | Terraform Associate, AWS SA Pro            | [ ] Not Started |
+| Infrastructure as Code      | Terraform, AWS (S3, Lambda, IAM)         | Terraform Associate, AWS SA Pro            | [ ] |
 | Backend API                 | Python (FastAPI or Flask), Boto3         | Python Certification             | [ ]            |
 | Automation & Bot Logic      | Slack SDK, Python Scheduler, GitHub Actions | DevOps Core, Python                        | [ ]            |
 | Containerization            | Docker, Kubernetes             | Docker DCA, CKA                             | [ ]            |
