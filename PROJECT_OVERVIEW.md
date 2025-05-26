@@ -109,10 +109,10 @@ It proves I can:
 
 This project is part of a larger cert-aligned system called **JobIntel**, designed to automate and track job hunting like a DevOps pipeline.
 
-- [jobintel-api](https://github.com/yourusername/jobintel-api) → Python backend for logging applications and recruiter data
-- [jobintel-bot](https://github.com/yourusername/jobintel-bot) → Slack bot integration for quick job logging and updates
-- [jobintel-ui](https://github.com/yourusername/jobintel-ui) → Web dashboard for visualizing job status and metrics
-- [jobintel-ml](https://github.com/yourusername/jobintel-ml) → NLP and AI-powered feedback tagging and analysis
-- [jobintel-cli](https://github.com/yourusername/jobintel-cli) → Command-line interface for local tracking
-- [jobintel-cicd](https://github.com/yourusername/jobintel-cicd) → GitHub Actions workflows for Terraform validation and backend deployment
-- [jobintel-docs](https://github.com/yourusername/jobintel-docs) → Cert notes, architecture breakdowns, and LinkedIn case studies
+- [jobintel-api](https://github.com/destiny-malone/jobintel-api) → Python backend for logging applications and recruiter data
+- [jobintel-bot](https://github.com/destiny-malone/jobintel-bot) → Slack bot integration for quick job logging and updates
+- [jobintel-ui](https://github.com/destiny-malone/jobintel-ui) → Web dashboard for visualizing job status and metrics
+- [jobintel-ml](https://github.com/destiny-malone/jobintel-ml) → NLP and AI-powered feedback tagging and analysis
+- [jobintel-cli](https://github.com/destiny-malone/jobintel-cli) → Command-line interface for local tracking
+- [jobintel-cicd](https://github.com/destiny-malone/jobintel-cicd) → GitHub Actions workflows for Terraform validation and backend deployment
+- [jobintel-docs](https://github.com/destiny-malone/jobintel-docs) → Cert notes, architecture breakdowns, and LinkedIn case studies

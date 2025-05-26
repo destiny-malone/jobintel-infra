@@ -1,0 +1,141 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.5 Chrome/134.0.6998.205 Electron/35.3.0 Safari/537.36" version="27.0.5" pages="4">
+  <diagram name="Infrastructure-Overview" id="9NX4Y1rs3swdtg5DZFtk">
+    <mxGraphModel dx="959" dy="562" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Q984rNwGfa7J2Oc1cBfp" name="Infra-Overview-v1">
+    <mxGraphModel dx="1782" dy="2224" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="DLzOx-_O90NdRR9GKNdW-33" target="DLzOx-_O90NdRR9GKNdW-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="DLzOx-_O90NdRR9GKNdW-1" target="DLzOx-_O90NdRR9GKNdW-56">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-1" value="Terraform CLI (Local)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;gradientColor=none;strokeColor=light-dark(#000000,#9933FF);" vertex="1" parent="1">
+          <mxGeometry y="260" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-2" value="&lt;i&gt;Runs init, plan, apply&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#CCCCCC;" vertex="1" parent="1">
+          <mxGeometry y="330" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-6" value="AWS Provider" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#0000FF);" vertex="1" parent="1">
+          <mxGeometry x="210" y="260" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-8" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://www.svgrepo.com/show/448266/aws.svg;sketch=1;curveFitting=1;jiggle=2;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="235" y="180" width="70" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="DLzOx-_O90NdRR9GKNdW-35" target="DLzOx-_O90NdRR9GKNdW-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-9" value="&lt;i&gt;Authenticates with IAM credentials&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#CCCCCC;" vertex="1" parent="1">
+          <mxGeometry x="210" y="330" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-10" value="S3 Bucket" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="240" y="430" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-12" value="&lt;i&gt;Randomized name via random_id&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#CCCCCC;" vertex="1" parent="1">
+          <mxGeometry x="230" y="520" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-13" value="&lt;i&gt;Public access blocked&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#CCCCCC;" vertex="1" parent="1">
+          <mxGeometry x="230" y="580" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-15" value="IAM Credentials" style="whiteSpace=wrap;html=1;rounded=0;strokeColor=light-dark(#000000,#FF0000);" vertex="1" parent="1">
+          <mxGeometry y="110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-17" value="&lt;i&gt;Access key + secret key&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#CCCCCC;" vertex="1" parent="1">
+          <mxGeometry y="70" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-18" value="&lt;i&gt;No root user&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#CCCCCC;" vertex="1" parent="1">
+          <mxGeometry y="30" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-24" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Infrastructure Overview - Phase 1&lt;/h1&gt;&lt;div&gt;Terraform IaC to S3&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="10" y="-120" width="840" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-34" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="DLzOx-_O90NdRR9GKNdW-1" target="DLzOx-_O90NdRR9GKNdW-33">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="130" y="290" as="sourcePoint" />
+            <mxPoint x="210" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-33" value="API Call" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="140" y="275" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-36" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="DLzOx-_O90NdRR9GKNdW-9" target="DLzOx-_O90NdRR9GKNdW-35">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="360" as="sourcePoint" />
+            <mxPoint x="270" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-35" value="Provision" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="240" y="380" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-43" value="Terraform Output" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="610" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-44" value="&lt;i&gt;Bucket Name&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#CCCCCC;" vertex="1" parent="1">
+          <mxGeometry x="420" y="690" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-45" value="&lt;i&gt;Bucket ARN&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#CCCCCC;" vertex="1" parent="1">
+          <mxGeometry x="420" y="730" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-46" value="&lt;i&gt;Region&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#CCCCCC;" vertex="1" parent="1">
+          <mxGeometry x="420" y="760" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-66" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="DLzOx-_O90NdRR9GKNdW-56" target="DLzOx-_O90NdRR9GKNdW-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-56" value="Authenticate" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="30" y="200" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-73" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="DLzOx-_O90NdRR9GKNdW-67">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="280" y="50" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-78" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="DLzOx-_O90NdRR9GKNdW-67">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="40" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-67" value="&lt;i&gt;AWS&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="360" width="260" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-74" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="DLzOx-_O90NdRR9GKNdW-69">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="280" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-80" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="DLzOx-_O90NdRR9GKNdW-69">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DLzOx-_O90NdRR9GKNdW-69" value="&lt;i&gt;IAM Credentials, Provider, S3 Bucket&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="310" y="50" width="360" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="FlMVzF6VJFtiRSmgi_Qk" name="CI/CD-Pipeline">
+    <mxGraphModel dx="692" dy="547" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="B-jH-AEgQdkRzTM_DiKE" name="Observability-Flow">
+    <mxGraphModel dx="959" dy="562" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

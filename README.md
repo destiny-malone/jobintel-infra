@@ -13,7 +13,6 @@ _A fully automated, infrastructure-as-code system that helps manage job searches
 
 [![Terraform CI](https://github.com/destiny-malone/jobintel-infra/actions/workflows/terraform.yml/badge.svg)](https://github.com/destiny-malone/jobintel-infra/actions/workflows/terraform.yml)
 
-
 ---
 
 ## **Overview**
@@ -31,13 +30,46 @@ Every part of the project is mapped to a real certification and career-relevant 
 
 ---
 
-## **Architecture Diagrams**
+## 📊 Architecture Diagrams
 
-> [Insert Draw.io/Excalidraw PNGs or markdown image links here]
+This section provides versioned diagrams of the infrastructure and automation powering JobIntel.
+Each diagram evolveed with the project, showcasing best practives, real-world patterns, and cloud-native growth over time.
 
-- Terraform-provisioned infrastructure
-- CI/CD pipeline using GitHub Actions
-- “What breaks and what happens next?” observability diagram
+---
+
+### 🛠 Infra Overview (Terraform to AWS S3)  
+
+Terraform provisioning to AWS S3 using secure IAM access.
+
+- **Terraform-Provisioned Infrastructure** — declarative IaC to deploy a randomized, public-blocked S3 bucket via `random_id`, ownership control, and seecure authentication.
+
+[![Infra Overview - Phase 1](docs/diagrams/infra-overview-v1.png)](docs/diagrams/infra-overview-v1.svg)
+
+- **Phase 1 Scope** - Terraform CLI → AWS Provider → IAM Auth → S3 Provisioning (no root user, secure bucket)
+
+---
+
+### 🚀 CI/CD Pipeline (GitHub Actions)  
+
+Pipeline enforcing Terraform quality standards and enabling automation.
+
+- **CI/CD Pipeline via GitHub Actions** — validates Terraform format, runs `terraform validate`, and auto-deploys Iac.
+
+[![CI/CD Pipeline](docs/diagrams/ci-cd-pipeline.png)](docs/diagrams/ci-cd-pipeline.svg)
+
+- **Upgrade**: Enforces `terraform fmt`, auto-plan + deploy, and security scan integration
+
+---
+
+### 🔍 Observability Flow (Fail → Detect → Recover)  
+
+Mapping system errors, logs, and fallback response flow for production-grade observability.
+
+- **Observability & Failure Flow** — “What breaks and what happens next?” diagram for real-time logging, alerting, and recovery pipelines.
+
+[![Observability Flow](docs/diagrams/observability-flow.png)](docs/diagrams/observability-flow.svg)
+
+- **Layered Strategy**: Track job rejections, Slack alerts, and feeds analytics to ML/NLP layer
 
 ---
 
