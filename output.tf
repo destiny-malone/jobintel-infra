@@ -11,17 +11,5 @@ output "region" {
   value       = var.region
 }
 
-output "access_key" {
-  description = "AWS access key"
-  value       = var.access_key
-  sensitive   = true # sensitive output to avoid exposing credentials
-}
-
-output "secret_key" {
-  description = "AWS secret key"
-  value       = var.secret_key
-  sensitive   = true # sensitive output to avoid exposing credentials
-}
-
 # ARN is the Amazon Resource Name, a unique (exact/full) identifier (ID) for AWS resources (buckets) to attach policies/permissions
 # The bucket name is the unique name of the S3 bucket
