@@ -85,7 +85,7 @@ jobs:
                 echo "EOF" >> $GITHUB_OUTPUT
 
             - name: Save Plan Output
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                 name: tfplan
                 path: tfplan.json
@@ -117,7 +117,7 @@ jobs:
 
             - name: Upload Plan Artifact
               if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                 name: terraform-plan
                 path: tfplan
@@ -164,7 +164,7 @@ jobs:
 
             - name: Upload Full Logs
               if: always()
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                 name: terraform-workflow-logs
                 path: |
