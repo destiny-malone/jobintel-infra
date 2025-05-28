@@ -1,6 +1,6 @@
 # Project Summary
 
-JobIntel is a fully cloud-native, cert-mapped job application tracker that uses Terraform, AWS, GitHub Actions, and Slack automation to track applications like a production system. [See full breakdown.] (PROJECT_OVERVIEW.md)
+JobIntel is a fully cloud-native, cert-mapped job application tracker that uses Terraform, AWS, GitHub Actions, and Slack automation to track applications like a production system. [See full breakdown.](PROJECT_OVERVIEW.md)
 
 ## JobIntel-DevOps-Driven Job Tracker Platform
 
@@ -30,14 +30,14 @@ Every part of the project is mapped to a real certification and career-relevant 
 
 ---
 
-## 📊 Architecture Diagrams
+## Architecture Diagrams
 
 This section provides versioned diagrams of the infrastructure and automation powering JobIntel.
 Each diagram evolveed with the project, showcasing best practives, real-world patterns, and cloud-native growth over time.
 
 ---
 
-### 🛠 Infra Overview (Terraform to AWS S3)  
+### Infra Overview (Terraform to AWS S3)
 
 Terraform provisioning to AWS S3 using secure IAM access.
 
@@ -49,7 +49,7 @@ Terraform provisioning to AWS S3 using secure IAM access.
 
 ---
 
-### 🚀 CI/CD Pipeline (GitHub Actions)  
+### CI/CD Pipeline (GitHub Actions)
 
 Pipeline enforcing Terraform quality standards and enabling automation.
 
@@ -57,11 +57,11 @@ Pipeline enforcing Terraform quality standards and enabling automation.
 
 [![CI/CD Pipeline - Phase 2](docs/diagrams/ci-cd-pipeline-v1.png)](docs/diagrams/ci-cd-pipeline-v1.svg)
 
-### 🧠 Phase 2: CI/CD Pipeline with Slack & Artifacts
+### Phase 2: CI/CD Pipeline with Slack & Artifacts
 
 Terraform CI/CD pipeline powered by GitHub Actions and Slack. Built for security, clarity, and real-world DevOps readiness.
 
-### 🚀 Key Features
+### Key Features
 
 - Format, validate, and plan with each push
 - JSON plan artifact creation
@@ -70,7 +70,7 @@ Terraform CI/CD pipeline powered by GitHub Actions and Slack. Built for security
 - Environment-based alert filtering (production only)
 - Full workflow logs stored as artifacts
 
-### 🧩 Diagrams
+### Diagrams
 
 | Version | Description |
 |---------|-------------|
@@ -81,7 +81,7 @@ Terraform CI/CD pipeline powered by GitHub Actions and Slack. Built for security
 
 ---
 
-### 🔍 Observability Flow (Fail → Detect → Recover)  
+### Observability Flow (Fail → Detect → Recover)
 
 Mapping system errors, logs, and fallback response flow for production-grade observability.
 
@@ -93,17 +93,17 @@ Mapping system errors, logs, and fallback response flow for production-grade obs
 
 ---
 
-## **Cert Mapped Layers**
+## Cert Mapped Layers
 
-| **Layer**                   | **Tool/Tech Used**                       | **Cert it Maps To**                        | **Status**     |
-|-----------------------------|------------------------------------------|--------------------------------------------|----------------|
-| Infrastructure as Code      | Terraform, AWS (S3, Lambda, IAM)         | Terraform Associate, AWS SA Pro            | [ ] |
-| Backend API                 | Python (FastAPI or Flask), Boto3         | Python Certification             | [ ]            |
-| Automation & Bot Logic      | Slack SDK, Python Scheduler, GitHub Actions | DevOps Core, Python                        | [ ]            |
-| Containerization            | Docker, Kubernetes             | Docker DCA, CKA                             | [ ]            |
-| CI/CD Pipelines             | GitHub Actions                           | DevOps Mastery, CI/CD Systems               | [ ]            |
-| Monitoring & Logging        | AWS CloudWatch, IAM Policies             | AWS SA Pro, Cloud Security (Future)        | [ ]            |
-| Intelligence Layer  | OpenAI API, NLP Tagging, Resume Scoring  | AI Curiosity Flex, ML/AI Enthusiast         | [ ]            |
+| Layer                    | Tools/Tech                            | Mapped Certification(s)                 | Status  |
+|--------------------------|----------------------------------------|------------------------------------------|---------|
+| Infrastructure as Code   | Terraform, AWS (S3, Lambda, IAM)       | Terraform Associate, AWS SA Pro          |  In Progress |
+| Backend API              | Python (FastAPI, Flask), Boto3         | Python Certification                     |  Planned |
+| Automation & Bot Logic   | Slack SDK, Python Scheduler, GH Actions| DevOps Core, Python                      |  Planned |
+| Containerization         | Docker, Kubernetes                     | Docker DCA, CKA                          |  Planned |
+| CI/CD Pipelines          | GitHub Actions                         | DevOps Mastery, CI/CD Systems            |  Phase 2 Complete |
+| Monitoring & Logging     | CloudWatch, IAM Policy, Alerting       | AWS SA Pro, Cloud Security (Future)      |  Planned |
+| Intelligence Layer       | OpenAI API, NLP, Resume Scoring        | ML/AI Exploratory                        |  Experimental |
 
 ---
 
@@ -120,7 +120,7 @@ Mapping system errors, logs, and fallback response flow for production-grade obs
 
 | Certification               | Status        | Date Completed   |
 |-----------------------------|---------------|------------------|
-| Terraform Associate         | [ ]  |                  |
+| Terraform Associate         | [ ]  | May 2025                 |
 | Docker Certified Associate  | [ ]  |                  |
 | Kubernetes CKA              | [ ]   |                  |
 | AWS Solutions Architect Pro | [ ]   |                  |
