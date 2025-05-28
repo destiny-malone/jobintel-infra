@@ -55,9 +55,29 @@ Pipeline enforcing Terraform quality standards and enabling automation.
 
 - **CI/CD Pipeline via GitHub Actions** — validates Terraform format, runs `terraform validate`, and auto-deploys Iac.
 
-[![CI/CD Pipeline](docs/diagrams/ci-cd-pipeline.png)](docs/diagrams/ci-cd-pipeline.svg)
+[![CI/CD Pipeline - Phase 2](docs/diagrams/ci-cd-pipeline-v1.png)](docs/diagrams/ci-cd-pipeline-v1.svg)
 
-- **Upgrade**: Enforces `terraform fmt`, auto-plan + deploy, and security scan integration
+### 🧠 Phase 2: CI/CD Pipeline with Slack & Artifacts
+
+Terraform CI/CD pipeline powered by GitHub Actions and Slack. Built for security, clarity, and real-world DevOps readiness.
+
+### 🚀 Key Features
+
+- Format, validate, and plan with each push
+- JSON plan artifact creation
+- Comment tfplan on PRs and pushes
+- Slack notifications for success/failure
+- Environment-based alert filtering (production only)
+- Full workflow logs stored as artifacts
+
+### 🧩 Diagrams
+
+| Version | Description |
+|---------|-------------|
+| v1      | Basic CI pipeline: fmt, validate, plan |
+| v2      | Advanced: tfplan output, Slack, logs, environment logic |
+
+[![CI/CD Pipeline v2](docs/diagrams/ci-cd-pipeline-v2.png)](docs/diagrams/ci-cd-pipeline-v2.svg)
 
 ---
 

@@ -2,26 +2,26 @@
 
 ## WHAT IT IS
 
-**JobIntel** is a fully cloud-native, infrastructure-as-code-powered system that tracks your job applications like a production-grade service.**
+**JobIntel** is a fully cloud-native, infrastructure-as-code-powered system that tracks your job applications like a production-grade service.
 
 This isn’t a spreadsheet. This is a **DevOps pipeline built to manage your career that anyone can use**, powered by the same technologies used in high-scale engineering teams. From infrastructure to automation to deployment, every layer is mapped to real-world certifications — and built to prove I’m not just “studying DevOps,” I’m living it.
 
 ## WHAT IT DOES
 
     • Automates tracking of job applications
-    • Logs recruiter names, interviews, feedback, and status via **CLI or Slack bot** (undecided)
+    • Logs recruiter names, interviews, feedback, and status via *CLI or Slack bot* (undecided)
     • Stores application data in **AWS (S3, DynamoDB, Lambda)** securely
-    • Uses **Terraform** to provision and manage all infrastructure
-    • Automatically deploys updates via **GitHub Actions CI/CD**
+    • Uses *Terraform* to provision and manage all infrastructure
+    • Automatically deploys updates via *GitHub Actions CI/CD*
     • Exposes progress and metrics via a **web dashboard or report** (undecided)
-    • Uses **OpenAI/NLP** to analyze feedback, detect patterns, and give career insight
+    • Uses *OpenAI/NLP* to analyze feedback, detect patterns, and give career insight
 
 ## WHAT IT PROVES
 
-    • I know how to write and deploy **modular, secure infrastructure**
-    • I can manage **backend automation, CI/CD, and cloud-native workflows**
+    • I know how to write and deploy *modular, secure infrastructure*
+    • I can manage *backend automation, CI/CD, and cloud-native workflows*
     • I map **certification concepts** into real projects that solve real problems
-    • I document and version my infrastructure with **GitHub best practices**
+    • I document and version my infrastructure with *GitHub best practices*
     • I treat my career like a product — with automation, metrics, and iteration
 
 ## PROJECT PHASES + PROGRESS
@@ -60,11 +60,11 @@ This isn’t a spreadsheet. This is a **DevOps pipeline built to manage your car
 
 ### Phase 4: Deployment + Monitoring
 
-    - Deploy backend using **Lambda, EC2, or Kubernetes** (CKA alignment)
-    - Add **CloudWatch logs** and **IAM roles**
-    - Secure the pipeline with **least privilege IAM policies**
+    - Deploy backend using *Lambda, EC2, or Kubernetes* (CKA alignment)
+    - Add *CloudWatch logs* and **IAM roles**
+    - Secure the pipeline with *least privilege IAM policies*
     - Configure **GitHub Actions** to auto-deploy new versions
-    - Implement **Terraform remote state sharing** across JobIntel repos
+    - Implement *Terraform remote state sharing* across JobIntel repos
     - Use terraform_remote_state in jobintel-api and jobintell-cicd to pull:
         • bucket_name
         • bucket_arn
@@ -73,7 +73,7 @@ This isn’t a spreadsheet. This is a **DevOps pipeline built to manage your car
 
 ### Phase 5: Intelligence Layer
 
-    - Use **OpenAI API** to:
+    - Use *OpenAI API* to:
     - Tag feedback trends (e.g., “underqualified,” “cloud gaps,” etc.)
     - Analyze rejection messages using NLP
     - Generate **weekly career stats reports**:
@@ -87,7 +87,7 @@ This isn’t a spreadsheet. This is a **DevOps pipeline built to manage your car
 |----------------------|-----------------------------------|--------------------------------------------|
 | Infra as Code        | Terraform, AWS                   | Terraform Associate, AWS SA Pro           |
 | Secure Auth          | IAM, AWS CLI credentials         | AWS SA Pro                                |
-| Containerization     | Docker, Kubernetes)   | Docker DCA, CKA                           |
+| Containerization     | Docker, Kubernetes   | Docker DCA, CKA                           |
 | CI/CD Pipelines      | GitHub Actions                   | DevOps Core, GitHub CI/CD best practices  |
 | Backend API          | Python (FastAPI/Flask), Boto3    | Python Cert                     |
 | Monitoring & Logging | CloudWatch, IAM roles            | AWS SA Pro, Cloud Security (future)       |
