@@ -85,7 +85,7 @@ jobs:
                 echo "EOF" >> $GITHUB_OUTPUT
 
             - name: Save Plan Output
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                 name: tfplan
                 path: tfplan.json
@@ -117,7 +117,7 @@ jobs:
 
             - name: Upload Plan Artifact
               if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                 name: terraform-plan
                 path: tfplan
@@ -138,19 +138,19 @@ jobs:
 
             - name: Slack Notification (Failure)
               if: github.ref == 'refs/heads/main' && github.event_name == 'push' && failure()
-              uses: 8398a7/actions-slack@v3
+              uses: slackapi/slack-github-action@v1
               with:
-                status: ${{ job.status }}
-                authorName: "Terraform CI/CD"
-                fields: repo,message,commit,author,action,eventName,ref,workflow,job,runId
-                customMessage: "Terraform plan failed in `${{ env.TF_VAR_environment }}` environment. Please check the logs for more details."
+                payload: |
+                  {
+                    "text": "Terraform plan failed in `${{ env.TF_VAR_environment }}` environment.",
+                    "attachments": [
+                      {
+                        "text": "Check logs and artifacts in GitHub Actions for more info. Workflow: `${{ github.workflow }}`, Job: `${{ github.job }}`"
+                      }
+                    ]
+                  }
               env:
                 SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-                SLACK_COLOR: ${{ job.status == 'success' && 'good' || 'danger' }}
-                SLACK_USERNAME: "Job Intelligence Bot"
-                SLACK_ICON_EMOJI: ":robot_face:"
-                SLACK_CHANNEL: "#terraform-notifications"
-                SLACK_MESSAGE: "Terraform CI has completed with status: ${{ job.status }} on ${{ github.repository }}. Check the logs and GitHub Actions tab for more details."
 
             - name: Save Terraform Workflow Logs
               if: always()
@@ -164,7 +164,7 @@ jobs:
 
             - name: Upload Full Logs
               if: always()
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                 name: terraform-workflow-logs
                 path: |
