@@ -145,16 +145,12 @@ jobs:
                     "text": "Terraform plan failed in `${{ env.TF_VAR_environment }}` environment.",
                     "attachments": [
                       {
-                        "text": ""Check logs and artifacts in GitHub Actions for more info. Workflow: `${{ github.workflow }}`, Job: `${{ github.job }}`"
+                        "text": "Check logs and artifacts in GitHub Actions for more info. Workflow: `${{ github.workflow }}`, Job: `${{ github.job }}`"
                       }
                     ]
                   }
               env:
                 SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-                SLACK_USERNAME: "Job Intelligence Bot"
-                SLACK_ICON_EMOJI: ":robot_face:"
-                SLACK_CHANNEL: "#terraform-notifications"
-                SLACK_MESSAGE: "Terraform CI has completed with status: ${{ github.job.status }} on ${{ github.repository }}. Check the logs and GitHub Actions tab for more details."
 
             - name: Save Terraform Workflow Logs
               if: always()
