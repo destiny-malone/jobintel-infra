@@ -1,6 +1,6 @@
 # Public automatoin engine where we can run terraform commands
 
-name: Terraform CI
+name: Terraform CI/CD
 on:
   push:
     branches:
@@ -9,15 +9,56 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  name: ${{ github.ref_name }}
+  TF_VAR_environment: ${{ github.ref_name }}
+  TF_VAR_region: us-west-2
+  TF_VAR_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  TF_LOG: ERROR
+  TF_INPUT: false
+  TF_CLI_ARGS: "-no-color"
+
 jobs:
     terraform:
-        name: Validate Terraform Code
+        name: "CI/CD Pipeline - Terraform"
         runs-on: ubuntu-latest
+
 
         steps:
             - name: Checkout repository
               uses: actions/checkout@v3
-    
+
+            - name: Setup Terraform
+              uses: hashicorp/setup-terraform@v3
+              with:
+                terraform_version: 1.6.6
+
+            - name: Cache Terraform Directory
+              uses: actions/cache@v3
+              with:
+                path: |
+                  ~/.terraform.d/plugin-cache
+                  ~/.terraform
+                key: terraform-${{ runner.os }}-${{ hashFiles('**/*.tf') }}
+                restore-keys: |
+                  terraform-${{ runner.os }}-
+
+            - name: Cache Terraform
+              uses: actions/cache@v3
+              with:
+                path: |
+                  ~/.terraform.d/plugin-cache
+                  ~/.terraform
+                key: ${{ runner.os }}-terraform-${{ hashFiles('**/*.tf') }}
+                restore-keys: |
+                  ${{ runner.os }}-terraform-
+                    
             - name: Setup Terraform
               uses: hashicorp/setup-terraform@v3
               with:
@@ -27,25 +68,117 @@ jobs:
               run: terraform fmt -check -recursive
         
             - name: Terraform Init
-              run: terraform init
-        
-            # - name: Terraform Plan
-            #   run: terraform plan -out=tfplan
-        
-            # - name: Terraform Apply
-            #   run: terraform apply -auto-approve
-            
-            # - name: Terraform Destroy
-            #   run: terraform destroy -auto-approve
+              run: terraform init -input=false -backend=true -reconfigure
 
-            - name: Terraform Output
-              run: terraform output
-            
-            - name: Terraform Format
-              run: terraform fmt -check
-            
             - name: Terraform Validate
               run: terraform validate
+
+            - name: Terraform Plan
+              run: terraform plan -out=tfplan
+
+            - name: Plan Output
+              id: plan_output
+              run: |
+                terraform show -json tfplan > tfplan.json
+                echo "plan<<EOF" >> $GITHUB_OUTPUT
+                cat tfplan.json >> $GITHUB_OUTPUT
+                echo "EOF" >> $GITHUB_OUTPUT
+
+            - name: Save Plan Output
+              uses: actions/upload-artifact@v3
+              with:
+                name: tfplan
+                path: tfplan.json
+
+            - name: Comment Plan on Pull Request
+              if: github.event_name == 'pull_request'
+              uses: marocchino/sticky-pull-request-comment@v2
+              with:
+                number: ${{ github.event.pull_request.number }}
+                header: "### Terraform Plan"
+                message: |
+                  ```json
+                  ${{ steps.plan_output.outputs.plan }}
+                  ```
+
+            - name: Comment Plan on Push
+              if: github.event_name == 'push'
+              uses: marocchino/sticky-pull-request-comment@v2
+              with:
+                header: "### Terraform Plan"
+                message: |
+                  ```json
+                  ${{ steps.plan_output.outputs.plan }}
+                  ```
+
+            - name: Terraform Apply
+              if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+              run: terraform apply -auto-approve tfplan
+
+            - name: Upload Plan Artifact
+              if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+              uses: actions/upload-artifact@v3
+              with:
+                name: terraform-plan
+                path: tfplan
+
+            - name: Slack Notification (Success)
+              if: github.ref == 'refs/heads/main' && github.event_name == 'push' && (env.TF_VAR_environment == 'production' || env.TF_VAR_environment == 'prod')
+              uses: slackapi/slack-github-action@v1
+              with:
+                payload: |
+                  {
+                    "text": "Terraform plan applied successfully in `${{ env.TF_VAR_environment }}` environment.",
+                    "attachments": [
+                      {
+                        "text": "Plan applied for branch `${{ github.ref }}. Check the plan artifact for more details."
+                      }
+                    ]
+                  }
+
+            - name: Slack Notification (Failure)
+              if: github.ref == 'refs/heads/main' && github.event_name == 'push' && failure()
+              uses: 8398a7/actions-slack@v3
+              with:
+                status: ${{ job.status }}
+                authorName: "Terraform CI/CD"
+                fields: repo,message,commit,author,action,eventName,ref,workflow,job,runId
+                customMessage: "Terraform plan failed in `${{ env.TF_VAR_environment }}` environment. Please check the logs for more details."
+              env:
+                SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+                SLACK_COLOR: ${{ job.status == 'success' && 'good' || 'danger' }}
+                SLACK_USERNAME: "Job Intelligence Bot"
+                SLACK_ICON_EMOJI: ":robot_face:"
+                SLACK_CHANNEL: "#terraform-notifications"
+                SLACK_MESSAGE: "Terraform CI has completed with status: ${{ job.status }} on ${{ github.repository }}. Check the logs and GitHub Actions tab for more details."
+
+            - name: Save Terraform Workflow Logs
+              if: always()
+              run: |
+                mkdir -p logs
+                terraform show -json tfplan > logs/tfplan.json
+                echo "Terraform logs saved to logs/tfplan.json"
+                terraform plan -no-color -out=tfplan | tee logs/terraform_plan_stdout.log > logs/terraform_plan.log 2> logs/terraform_plan_stderr.log || true
+              env:
+                TF_LOG: ${{ secrets.TF_LOG }}
+
+            - name: Upload Full Logs
+              if: always()
+              uses: actions/upload-artifact@v3
+              with:
+                name: terraform-workflow-logs
+                path: |
+                  logs/tfplan.json
+                  logs/terraform_plan_stdout.log
+                  logs/terraform_plan.log
+                  logs/terraform_plan_stderr.log
+
+            - name: Label PR
+              if: github.event_name == 'pull_request'
+              uses: actions/labeler@v4
+
+
+            
 
 
 # Every push to the main branch will trigger this workflow
