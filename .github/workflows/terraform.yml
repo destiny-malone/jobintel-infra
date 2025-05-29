@@ -137,7 +137,7 @@ jobs:
               with:
                 payload: |
                   {
-                    "text": "Terraform plan applied successfully in `${{ env.TF_VAR_environment }}` environment.",
+                    "text": "Terraform plan applied successfully in `${{ env.TF_VAR_environment }}` environment (branch: `${{ github.ref }}`).",
                     "attachments": [
                       {
                         "text": "Plan applied for branch `${{ github.ref }}. Check the plan artifact for more details."
@@ -151,7 +151,7 @@ jobs:
               with:
                 payload: |
                   {
-                    "text": "Terraform plan failed in `${{ env.TF_VAR_environment }}` environment.",
+                    "text": "Terraform plan failed in `${{ env.TF_VAR_environment }}` environment (branch: `${{ github.ref }}`).",
                     "attachments": [
                       {
                         "text": "Check logs and artifacts in GitHub Actions for more info. Workflow: `${{ github.workflow }}`, Job: `${{ github.job }}`"
