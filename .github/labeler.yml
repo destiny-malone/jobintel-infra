@@ -1,4 +1,15 @@
 infrastructure:
-  - '*.tf`
+  - "*.tf"
+  - "**/*.tf"
+
 ci/cd:
-  - '.github/workflows/*'
+  - ".github/workflows/*"
+
+documentation:
+  - "**/*.md"
+
+scripts:
+  - "**/*.sh"
+  - "**/*.py"
+  - "**/*.ps1"
+  - "**/*.psm1"
