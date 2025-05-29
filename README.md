@@ -120,7 +120,7 @@ Mapping system errors, logs, and fallback response flow for production-grade obs
 
 | Certification               | Status        | Date Completed   |
 |-----------------------------|---------------|------------------|
-| Terraform Associate         | [ ]  | May 2025                 |
+| Terraform Associate         | [ ]  |  May 2025                |
 | Docker Certified Associate  | [ ]  |                  |
 | Kubernetes CKA              | [ ]   |                  |
 | AWS Solutions Architect Pro | [ ]   |                  |
