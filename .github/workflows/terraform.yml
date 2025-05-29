@@ -18,9 +18,11 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  SLACK_CHANNEL: ${{ github.ref_name == 'main' && '#production-alerts' || '#dev-alerts' }}
   TF_VAR_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
   TF_VAR_region: us-west-2
   TF_VAR_environment: ${{ github.ref_name == 'main' && 'production' || github.ref_name }}
+  DISPLAY_BRANCH: ${{ github.ref }}
   TF_LOG: ${{ secrets.TF_LOG }}
   TF_INPUT: false
   TF_CLI_ARGS: "-no-color"
@@ -34,11 +36,8 @@ jobs:
 
         steps:
             #  Testing Slack Webhook URL
-            - name: Break internally
-              run: exit 1
-
-
-
+            # - name: Break internally
+            #   run: exit 1
 
             - name: Checkout repository
               uses: actions/checkout@v3
@@ -132,18 +131,20 @@ jobs:
                 path: tfplan
 
             - name: Slack Notification (Success)
-              if: github.ref == 'refs/heads/main' && github.event_name == 'push' && (env.TF_VAR_environment == 'production' || env.TF_VAR_environment == 'prod')
+              if: github.ref == 'refs/heads/main' && github.event_name == 'push' && success() && (env.TF_VAR_environment == 'production' || env.TF_VAR_environment == 'prod')
               uses: slackapi/slack-github-action@v1
               with:
                 payload: |
                   {
-                    "text": "Terraform plan applied successfully in `${{ env.TF_VAR_environment }}` environment (branch: `${{ github.ref }}`).",
+                    "text": "Terraform plan applied successfully in `${{ env.TF_VAR_environment }}` environment (branch: `${{ env.DISPLAY_BRANCH }}`).",
                     "attachments": [
                       {
                         "text": "Plan applied for branch `${{ github.ref }}. Check the plan artifact for more details."
                       }
                     ]
                   }
+              env:
+                SLACK_WEBHOOK_URL: ${{ env.SLACK_WEBHOOK_URL }}
 
             - name: Slack Notification (Failure)
               if: github.ref == 'refs/heads/main' && github.event_name == 'push' && failure()
@@ -151,7 +152,7 @@ jobs:
               with:
                 payload: |
                   {
-                    "text": "Terraform plan failed in `${{ env.TF_VAR_environment }}` environment (branch: `${{ github.ref }}`).",
+                    "text": "Terraform plan failed in `${{ env.TF_VAR_environment }}` environment (branch: `${{ env.DISPLAY_BRANCH }}`).",
                     "attachments": [
                       {
                         "text": "Check logs and artifacts in GitHub Actions for more info. Workflow: `${{ github.workflow }}`, Job: `${{ github.job }}`"
