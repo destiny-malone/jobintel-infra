@@ -20,7 +20,7 @@ env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   TF_VAR_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
   TF_VAR_region: us-west-2
-  TF_VAR_environment: ${{ github.ref_name }}
+  TF_VAR_environment: ${{ github.ref_name == 'main' && 'production' || github.ref_name }}
   TF_LOG: ${{ secrets.TF_LOG }}
   TF_INPUT: false
   TF_CLI_ARGS: "-no-color"
@@ -37,7 +37,7 @@ jobs:
             - name: Break internally
               run: exit 1
 
-              
+
 
 
             - name: Checkout repository
@@ -137,7 +137,7 @@ jobs:
               with:
                 payload: |
                   {
-                    "text": "Terraform plan applied successfully in `${{ env.TF_VAR_environment }}` environment.",
+                    "text": "Terraform plan applied successfully in `${{ env.TF_VAR_environment }}` environment (branch: `${{ github.ref }}`).",
                     "attachments": [
                       {
                         "text": "Plan applied for branch `${{ github.ref }}. Check the plan artifact for more details."
@@ -151,7 +151,7 @@ jobs:
               with:
                 payload: |
                   {
-                    "text": "Terraform plan failed in `${{ env.TF_VAR_environment }}` environment.",
+                    "text": "Terraform plan failed in `${{ env.TF_VAR_environment }}` environment (branch: `${{ github.ref }}`).",
                     "attachments": [
                       {
                         "text": "Check logs and artifacts in GitHub Actions for more info. Workflow: `${{ github.workflow }}`, Job: `${{ github.job }}`"
