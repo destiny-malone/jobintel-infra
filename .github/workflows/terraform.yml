@@ -33,6 +33,13 @@ jobs:
 
 
         steps:
+            #  Testing Slack Webhook URL
+            - name: Break internally
+              run: exit 1
+
+              
+
+
             - name: Checkout repository
               uses: actions/checkout@v3
 
