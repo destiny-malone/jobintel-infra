@@ -1,4 +1,4 @@
-# Project Summary
+# JobIntel: A Cloud-Native DevOps Job Tracker
 
 JobIntel is a fully cloud-native, cert-mapped job application tracker that uses Terraform, AWS, GitHub Actions, and Slack automation to track applications like a production system. [See full breakdown.](PROJECT_OVERVIEW.md)
 
@@ -15,6 +15,17 @@ _A fully automated, infrastructure-as-code system that helps manage job searches
 
 ---
 
+## Live Automation
+
+**Slack Alerts Triggered by GitHub Actions:**
+
+> Successful & Failed Terraform Alerts now trigger Slack messages in real time.
+
+![Slack Failure Notification](docs/screenshots/slack-failure.png)
+![Slack Success Notification](docs/screenshots/slack-success.png)
+
+---
+
 ## **Overview**
 
 JobIntel is a cloud-native project I built while studying for certifications and job hunting remotely. I wanted something more powerful than a spreadsheet or Notion board — I wanted infrastructure, automation, and insights.
@@ -26,14 +37,30 @@ This project deploys a job application tracker with:
     - OpenAI intelligence layer for analyzing feedback and rejection patterns
     - Resume version tracking + recruiter-facing S3 resume site
 
-Every part of the project is mapped to a real certification and career-relevant DevOps skill.
+This project is being built in **phases**, with each mapped directly to DevOps certifications, real-world tooling, and production design.
+
+- Phases 1–2 complete
+- Phase 3: Observability, structured tfplan parsing, Slack log enrichment
+- Phase 4+: Python backend, resume versioning, CLI, NLP intelligence
+
+---
+
+## Design Principles
+
+This project is structured like a real internal platform tool:
+
+- **Secrets managed via GitHub Environments**
+- **CI/CD gated by environment filtering**
+- **Terraform artifacts and logs uploaded as GitHub Actions artifacts**
+- **Slack alerts scoped to production only**
+- **Each phase is versioned and cert-aligned**
 
 ---
 
 ## Architecture Diagrams
 
 This section provides versioned diagrams of the infrastructure and automation powering JobIntel.
-Each diagram evolveed with the project, showcasing best practives, real-world patterns, and cloud-native growth over time.
+Each diagram evolved with the project, showcasing best practices, real-world patterns, and cloud-native growth over time.
 
 ---
 
@@ -41,7 +68,7 @@ Each diagram evolveed with the project, showcasing best practives, real-world pa
 
 Terraform provisioning to AWS S3 using secure IAM access.
 
-- **Terraform-Provisioned Infrastructure** — declarative IaC to deploy a randomized, public-blocked S3 bucket via `random_id`, ownership control, and seecure authentication.
+- **Terraform-Provisioned Infrastructure** — declarative IaC to deploy a randomized, public-blocked S3 bucket via `random_id`, ownership control, and secure authentication.
 
 [![Infra Overview - Phase 1](docs/diagrams/infra-overview-v1.png)](docs/diagrams/infra-overview-v1.svg)
 
@@ -49,11 +76,11 @@ Terraform provisioning to AWS S3 using secure IAM access.
 
 ---
 
-### CI/CD Pipeline (GitHub Actions)
+### CI/CD Pipelines (GitHub Actions | CI/CD Systems)
 
 Pipeline enforcing Terraform quality standards and enabling automation.
 
-- **CI/CD Pipeline via GitHub Actions** — validates Terraform format, runs `terraform validate`, and auto-deploys Iac.
+- **CI/CD Pipeline via GitHub Actions** — validates Terraform format, runs `terraform validate`, and auto-deploys IaC.
 
 [![CI/CD Pipeline - Phase 2](docs/diagrams/ci-cd-pipeline-v1.png)](docs/diagrams/ci-cd-pipeline-v1.svg)
 
@@ -97,13 +124,25 @@ Mapping system errors, logs, and fallback response flow for production-grade obs
 
 | Layer                    | Tools/Tech                            | Mapped Certification(s)                 | Status  |
 |--------------------------|----------------------------------------|------------------------------------------|---------|
-| Infrastructure as Code   | Terraform, AWS (S3, Lambda, IAM)       | Terraform Associate, AWS SA Pro          |  In Progress |
+| Infrastructure as Code   | Terraform, AWS (S3, Lambda, IAM)       | Terraform Associate, AWS SA Pro          |  Phase 1 Complete |
 | Backend API              | Python (FastAPI, Flask), Boto3         | Python Certification                     |  Planned |
 | Automation & Bot Logic   | Slack SDK, Python Scheduler, GH Actions| DevOps Core, Python                      |  Planned |
 | Containerization         | Docker, Kubernetes                     | Docker DCA, CKA                          |  Planned |
 | CI/CD Pipelines          | GitHub Actions                         | DevOps Mastery, CI/CD Systems            |  Phase 2 Complete |
 | Monitoring & Logging     | CloudWatch, IAM Policy, Alerting       | AWS SA Pro, Cloud Security (Future)      |  Planned |
 | Intelligence Layer       | OpenAI API, NLP, Resume Scoring        | ML/AI Exploratory                        |  Experimental |
+
+---
+
+## Real-World Impact
+
+| What This Project Simulates | Real-World Job Skill |
+|-----------------------------|-----------------------|
+| Slack alerting + artifact uploads | On-call observability & CI/CD monitoring |
+| GitHub Actions gated by environment | Secure pipeline workflows (prod vs dev logic) |
+| Terraform + AWS IAM + S3 | Infrastructure-as-Code provisioning in real orgs |
+| Logs & tfplan artifacts | Debugging infrastructure failures |
+| Future: API + resume tracker | Internal platform tooling or job systems |
 
 ---
 
