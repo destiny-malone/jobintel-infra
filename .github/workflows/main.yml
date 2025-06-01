@@ -180,7 +180,7 @@ jobs:
             - name: Save Terraform Workflow Logs
               if: always()
               run: |
-                mkdir -p /logs
+                # mkdir -p logs
                 echo "Saving Terraform plan in JSON format..."
                 # Save the Terraform plan in JSON format for further analysis
                 terraform show -json tfplan > logs/tfplan.json
