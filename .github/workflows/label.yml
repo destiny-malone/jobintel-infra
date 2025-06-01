@@ -7,8 +7,11 @@ on:
 jobs:
   label:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - id: labeler
         uses: actions/labeler@v4
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          configuration-path: ".github/labeler.yml"
