@@ -8,7 +8,7 @@ output "bucket_arn" {
 }
 output "region" {
   description = "The AWS region where the bucket is deployed"
-  value       = var.region
+  value       = "us-west-2"
 }
 
 # ARN is the Amazon Resource Name, a unique (exact/full) identifier (ID) for AWS resources (buckets) to attach policies/permissions
