@@ -24,7 +24,7 @@ slack:
   notify_on_failed: true
 
 terraform:
-  tfplan_path: ".tfplan.json"
+  tfplan_path: "logs/tfplan.json"
   log_artifacts: true
   log_artifacts_path: "logs/terraform"
   log_artifacts_format: "json"
