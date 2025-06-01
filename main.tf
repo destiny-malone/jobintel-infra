@@ -1,5 +1,5 @@
 provider "aws" {
-  region = var.region
+  region = "us-west-2"
 }
 
 resource "random_id" "bucket_id" {
@@ -31,6 +31,15 @@ resource "aws_s3_bucket_public_access_block" "resume_public_block" {
   restrict_public_buckets = false
 }
 
+resource "aws_s3_bucket_versioning" "resume_versioning" {
+  bucket = aws_s3_bucket.resume_bucket.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 # This sets up a secure, modern AWS S3 bucket for Terraform env in WSL using AWS IAM user/secure credentials
-# Terraform script w/ ownership controls and public access blocks now deployed due to replacing depricated ACLs
+# Terraform script w/ ownership controls and public access blocks now deployed due to replacing deprecated ACLs
 # Deployed infrastructure as code while being able to solve multi-real-world errors regarding initiation and applying
+# of the S3 bucket with ownership controls and public access blocks

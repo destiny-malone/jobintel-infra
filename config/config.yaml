@@ -1,0 +1,68 @@
+aws_region: us-west-2
+
+slack:
+  webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+  channel: "#jobintel-alerts"
+  username: "JobIntel Bot"
+  icon_emoji: ":robot_face:"
+  mention_users: true
+  notify_on_change: true
+  notify_on_start: true
+  notify_on_completion: true
+  notify_on_timeout: true
+  notify_on_error: true
+  notify_on_abort: true
+  notify_on_cancel: true
+  notify_on_retry: true
+  notify_on_skipped: true
+  notify_on_queued: true
+  notify_on_running: true
+  notify_on_waiting: true
+  notify_on_unknown: true
+  notify_on_unstable: true
+  notify_on_successful: true
+  notify_on_failed: true
+
+terraform:
+  tfplan_path: ".tfplan.json"
+  log_artifacts: true
+  log_artifacts_path: "logs/terraform"
+  log_artifacts_format: "json"
+  log_artifacts_compression: "gzip"
+  log_artifacts_max_size: "10MB"
+  log_artifacts_max_age: "30d"
+  log_artifacts_retention: "30d"
+  upload_artifacts: true
+  upload_to: "slack"
+# This is a configuration file for Terraform and Slack integration in a CI/CD pipeline.
+# It defines the AWS region, Slack webhook settings, and Terraform backend configuration.
+# The configuration includes settings for logging, artifact management, and notification preferences.
+  backend:
+    type: "s3"
+    bucket: "jobintel-terraform-state"
+    key: "terraform.tfstate"
+    region: "{{ aws_region }}"
+    dynamodb_table: "jobintel-terraform-locks"
+    encrypt: true
+  variables:
+    account_id: "{{ secrets.AWS_ACCOUNT_ID }}"
+    region: "{{ aws_region }}"
+    environment: "{{ github.ref_name == 'main' and 'production' or github.ref_name }}"
+  cli_args:
+    no_color: true
+# This configuration file is used to set up a CI/CD pipeline for Terraform using GitHub Actions.
+# It includes environment variables, job metadata, and Terraform settings.
+
+
+logging:
+  color_output: true
+  log_level: "{{ secrets.TF_LOG | default('INFO') }}"
+  log_format: "json"
+
+
+job_metadata:
+  display_branch: "{{ github.ref }}"
+  environment: "{{ github.ref_name == 'main' and 'production' or github.ref_name }}"
+  slack_channel: "{{ github.ref_name == 'main' and '#production-alerts' or '#dev-alerts' }}"
+  team: "JobIntel Platform Team"
+  job_name: "CI/CD Pipeline - Terraform"
