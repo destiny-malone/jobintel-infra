@@ -82,7 +82,6 @@ jobs:
                 key: ${{ runner.os }}-terraform-${{ hashFiles('**/*.tf') }}
                 restore-keys: |
                   ${{ runner.os }}-terraform-
-            
 
             - name: Terraform Format Check
               run: terraform fmt -check -recursive
@@ -104,10 +103,7 @@ jobs:
               run: echo "::set-output name=plan::$(cat logs/tfplan.json | jq -c .)"
 
             - name: Parse tfplan and Send to Slack
-              run:
-                python parser/parse_tfplan.py --input logs/tfplan.json --output logs/plan_output.json
-
-
+              run: python parser/parse_tfplan.py --input logs/tfplan.json --output logs/plan_output.json
 
             - name: Save Plan Output
               uses: actions/upload-artifact@v4
