@@ -97,15 +97,15 @@ jobs:
               run: terraform plan -out=tfplan.binary
 
             - name: Convert Plan to JSON
-              run: terraform show -json tfplan.binary > tfplan.json
+              run: terraform show -json tfplan.binary > logs/tfplan.json
 
             - name: Set Output for Plan
               id: plan_output
-              run: echo "::set-output name=plan::$(cat tfplan.json | jq -c .)"
+              run: echo "::set-output name=plan::$(cat logs/tfplan.json | jq -c .)"
 
             - name: Parse tfplan and Send to Slack
               run:
-                python parser/parse_tfplan.py --input tfplan.json --output plan_output.json
+                python parser/parse_tfplan.py --input logs/tfplan.json --output logs/plan_output.json
 
 
 
@@ -113,7 +113,7 @@ jobs:
               uses: actions/upload-artifact@v4
               with:
                 name: tfplan
-                path: tfplan.json
+                path: logs/tfplan.json
 
             - name: Comment Plan on Pull Request
               if: github.event_name == 'pull_request'
