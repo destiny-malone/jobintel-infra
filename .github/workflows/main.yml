@@ -178,7 +178,6 @@ jobs:
             - name: Save Terraform Workflow Logs
               if: always()
               run: |
-                mkdir -p logs
                 terraform show -json tfplan > logs/tfplan.json
                 echo "Terraform logs saved to logs/tfplan.json"
                 terraform plan -no-color -out=tfplan | tee logs/terraform_plan_stdout.log > logs/terraform_plan.log 2> logs/terraform_plan_stderr.log || true
