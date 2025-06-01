@@ -65,8 +65,7 @@ def format_slack_message(resources, branch, actor, duration, status="success"):
         'failure': ':x:',
         'in_progress': ':hourglass_flowing_sand:',
     }
-    status_str = f"{emoji.get(status, ':question:')} {status.capitalize()}
-
+    status_str = f"{emoji.get(status, ':question:')} {status.capitalize()}"
 
     # Format the message
     message = "```"
