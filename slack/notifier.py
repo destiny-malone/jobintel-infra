@@ -1,7 +1,7 @@
 import os
+import sys
 import requests
-from slack_sdk import WebClient
-from slack_sdk.errors import SlackApiError
+
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../utils'))
 from config_loader import load_config
@@ -65,8 +65,7 @@ def format_slack_message(resources, branch, actor, duration, status="success"):
         'failure': ':x:',
         'in_progress': ':hourglass_flowing_sand:',
     }
-    status_str = f"{emoji.get(status, ':question:')} {status.capitalize()}
-
+    status_str = f"{emoji.get(status, ':question:')} {status.capitalize()}"
 
     # Format the message
     message = "```"

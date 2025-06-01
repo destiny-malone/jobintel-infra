@@ -2,13 +2,14 @@ import os
 import sys
 import json
 import requests
-from slack.notifier import send_slack_notification, format_slack_message
 
 # Constants
 from datetime import datetime
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../utils'))
 from config_loader import load_config
+sys.path.append(os.path.join(os.path.dirname(__file__), '../slack'))
+from notifier import send_slack_notification, format_slack_message
 
 
 # This script parses a Terraform plan file and sends a formatted message to a Slack channel.
