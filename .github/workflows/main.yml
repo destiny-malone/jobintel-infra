@@ -93,7 +93,7 @@ jobs:
               run: terraform plan -out=tfplan.binary
 
             - name: Convert Plan to JSON
-              run: |
+              run: 
                 terraform show -json tfplan.binary > tfplan.json
 
             - name: Set Output for Plan
