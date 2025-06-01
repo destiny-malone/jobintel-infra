@@ -1,6 +1,10 @@
 import os
 import requests
-from utils.config_loader import load_config
+from slack_sdk import WebClient
+from slack_sdk.errors import SlackApiError
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '../utils'))
+from config_loader import load_config
 
 
 # Load configuration
@@ -18,6 +22,7 @@ def send_slack_notification(message: str) -> bool:
     Returns:
         Raise: True if response from the Slack API sent successfully, Raise Exception otherwise.
     """
+    # client = WebClient(token=)
     webhook_url = os.environ.get('SLACK_WEBHOOK_URL')
     # Ensure webhool url is set
     if not webhook_url:
