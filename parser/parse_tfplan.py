@@ -7,7 +7,6 @@ from slack.notifier import send_slack_notification, format_slack_message
 # Constants
 from datetime import datetime
 
-
 sys.path.append(os.path.join(os.path.dirname(__file__), '../utils'))
 from config_loader import load_config
 
