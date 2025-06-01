@@ -8,7 +8,7 @@ from datetime import datetime
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../utils'))
 from config_loader import load_config
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../slack')))
+sys.path.append(os.path.join(os.path.dirname(__file__), '../slack'))
 from notifier import send_slack_notification, format_slack_message
 
 
