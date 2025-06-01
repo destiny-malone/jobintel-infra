@@ -35,3 +35,10 @@ terraform.rc
 
 # Ignore virtual env files
 .venv
+
+
+logs/
+*.binary
+*.json
+*.log
+.env
