@@ -172,7 +172,7 @@ Mapping system errors, logs, and fallback response flow for production-grade obs
 
 Because job hunting deserves DevOps, too.
 
-I was studying, building, and applying all at the same time — and this project let me do all three in one place. It’s my resume, my tracker, and my case study in infrastructure-as-career. 
+I was studying, building, and applying all at the same time — and this project let me do all three in one place. It’s my resume, my tracker, and my case study in infrastructure-as-career.
 
 ---
 
