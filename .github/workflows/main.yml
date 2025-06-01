@@ -1,5 +1,3 @@
-# Public automatoin engine where we can run terraform commands
-
 name: Terraform CI/CD Pipeline
 on:
   push:
@@ -17,8 +15,6 @@ permissions:
   checks: write
   actions: write
   deployments: write
-  # The following permissions are required for the labeler action to work correctly
-  # labeler access needs to be set to write for labeling PRs using GitHub Actions/Tokens
 
 env:
   BRANCH_NAME: ${{ github.ref_name }}
@@ -36,178 +32,118 @@ env:
   TF_CLI_ARGS: "-no-color"
 
 jobs:
-    terraform:
-        name: "CI/CD Pipeline - Terraform"
-        runs-on: ubuntu-latest
-        environment: production        
+  terraform:
+    name: "CI/CD Pipeline - Terraform"
+    runs-on: ubuntu-latest
+    environment: production
 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-        steps:
-            #  Testing Slack Webhook URL
-            # - name: Break internally
-            #   run: exit 1
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.12.1
 
-            - name: Checkout repository
-              uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11.12
 
-            - name: Setup Terraform
-              uses: hashicorp/setup-terraform@v3
-              with:
-                terraform_version: 1.12.1
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
-            - name: Set up Python
-              uses: actions/setup-python@v4
-              with:
-                python-version: 3.11.12
+      - name: Cache Terraform Directory
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.terraform.d/plugin-cache
+            ~/.terraform
+          key: terraform-${{ runner.os }}-${{ hashFiles('**/*.tf') }}
+          restore-keys: |
+            terraform-${{ runner.os }}-
 
-            - name: Install dependencies
-              run: pip install -r requirements.txt
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
 
-            - name: Cache Terraform Directory
-              uses: actions/cache@v3
-              with:
-                path: |
-                  ~/.terraform.d/plugin-cache
-                  ~/.terraform
-                key: terraform-${{ runner.os }}-${{ hashFiles('**/*.tf') }}
-                restore-keys: |
-                  terraform-${{ runner.os }}-
+      - name: Terraform Init
+        run: terraform init -input=false -backend=true -reconfigure
 
-            - name: Cache Terraform
-              uses: actions/cache@v3
-              with:
-                path: |
-                  ~/.terraform.d/plugin-cache
-                  ~/.terraform
-                key: ${{ runner.os }}-terraform-${{ hashFiles('**/*.tf') }}
-                restore-keys: |
-                  ${{ runner.os }}-terraform-
+      - name: Terraform Validate
+        run: terraform validate
 
-            - name: Terraform Format Check
-              run: terraform fmt -check -recursive
-        
-            - name: Terraform Init
-              run: terraform init -input=false -backend=true -reconfigure
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan.binary
 
-            - name: Terraform Validate
-              run: terraform validate
+      - name: Convert Plan to JSON
+        run: |
+          mkdir -p logs
+          terraform show -json tfplan.binary > logs/tfplan.json
 
-            - name: Terraform Plan
-              run: terraform plan -out=tfplan.binary
+      - name: Set Output for Plan
+        id: plan_output
+        run: echo "::set-output name=plan::$(cat logs/tfplan.json | jq -c .)"
 
-            - name: Convert Plan to JSON
-              run: |
-                mkdir -p logs
-                terraform show -json tfplan.binary > logs/tfplan.json
+      - name: Parse tfplan and Send to Slack
+        run: python parser/parse_tfplan.py --input logs/tfplan.json --output logs/plan_output.json
 
-            - name: Set Output for Plan
-              id: plan_output
-              run: echo "::set-output name=plan::$(cat logs/tfplan.json | jq -c .)"
+      - name: Save Plan Output
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan
+          path: logs/tfplan.json
 
-            - name: Parse tfplan and Send to Slack
-              run: python parser/parse_tfplan.py --input logs/tfplan.json --output logs/plan_output.json
+      - name: Comment Plan on Pull Request
+        if: github.event_name == 'pull_request'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          number: ${{ github.event.pull_request.number }}
+          header: "### Terraform Plan"
+          message: |
+            ```json
+            ${{ steps.plan_output.outputs.plan }}
+            ```
 
-            - name: Save Plan Output
-              uses: actions/upload-artifact@v4
-              with:
-                name: tfplan
-                path: logs/tfplan.json
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve tfplan
 
-            - name: Comment Plan on Pull Request
-              if: github.event_name == 'pull_request'
-              uses: marocchino/sticky-pull-request-comment@v2
-              with:
-                number: ${{ github.event.pull_request.number }}
-                header: "### Terraform Plan"
-                message: |
-                  ```json
-                  ${{ steps.plan_output.outputs.plan }}
-                  ```
+      - name: Slack Notification (Success)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push' && success() && (env.TF_VAR_environment == 'production' || env.TF_VAR_environment == 'prod')
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "Terraform plan applied successfully in `${{ env.TF_VAR_environment }}` environment (branch: `${{ env.DISPLAY_BRANCH }}`)."
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ env.SLACK_WEBHOOK_URL }}
 
-            - name: Comment Plan on Push
-              if: github.event_name == 'push'
-              uses: marocchino/sticky-pull-request-comment@v2
-              with:
-                header: "### Terraform Plan"
-                message: |
-                  ```json
-                  ${{ steps.plan_output.outputs.plan }}
-                  ```
+      - name: Slack Notification (Failure)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push' && failure()
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "Terraform plan failed in `${{ env.TF_VAR_environment }}` environment (branch: `${{ env.DISPLAY_BRANCH }}`)."
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ env.SLACK_WEBHOOK_URL }}
 
-            - name: Terraform Apply
-              if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-              run: terraform apply -auto-approve tfplan
+      - name: Save Terraform Workflow Logs
+        if: always()
+        run: |
+          echo "Saving Terraform plan in JSON format..."
+          terraform show -json tfplan > logs/tfplan.json
+          echo "Terraform logs saved to logs/tfplan.json"
+        env:
+          TF_LOG: ${{ env.TF_LOG }}
 
-            - name: Upload Plan Artifact
-              if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-              uses: actions/upload-artifact@v4
-              with:
-                name: terraform-plan
-                path: tfplan
-
-            - name: Slack Notification (Success)
-              if: github.ref == 'refs/heads/main' && github.event_name == 'push' && success() && (env.TF_VAR_environment == 'production' || env.TF_VAR_environment == 'prod')
-              uses: slackapi/slack-github-action@v1
-              with:
-                payload: |
-                  {
-                    "text": "Terraform plan applied successfully in `${{ env.TF_VAR_environment }}` environment (branch: `${{ env.DISPLAY_BRANCH }}`).",
-                    "attachments": [
-                      {
-                        "text": "Plan applied for branch `${{ github.ref }}. Check the plan artifact for more details."
-                      }
-                    ]
-                  }
-              env:
-                SLACK_WEBHOOK_URL: ${{ env.SLACK_WEBHOOK_URL }}
-
-            - name: Slack Notification (Failure)
-              if: github.ref == 'refs/heads/main' && github.event_name == 'push' && failure()
-              uses: slackapi/slack-github-action@v1
-              with:
-                payload: |
-                  {
-                    "text": "Terraform plan failed in `${{ env.TF_VAR_environment }}` environment (branch: `${{ env.DISPLAY_BRANCH }}`).",
-                    "attachments": [
-                      {
-                        "text": "Check logs and artifacts in GitHub Actions for more info. Workflow: `${{ github.workflow }}`, Job: `${{ github.job }}`"
-                      }
-                    ]
-                  }
-              env:
-                SLACK_WEBHOOK_URL: ${{ env.SLACK_WEBHOOK_URL }}
-
-            - name: Save Terraform Workflow Logs
-              if: always()
-              run: |
-                # mkdir -p logs
-                echo "Saving Terraform plan in JSON format..."
-                # Save the Terraform plan in JSON format for further analysis
-                terraform show -json tfplan > logs/tfplan.json
-                echo "Terraform logs saved to logs/tfplan.json"
-                terraform plan -no-color -out=tfplan | tee logs/terraform_plan_stdout.log > logs/terraform_plan.log 2> logs/terraform_plan_stderr.log || true
-              env:
-                TF_LOG: ${{ env.TF_LOG }}
-
-            - name: Upload Full Logs
-              if: always()
-              uses: actions/upload-artifact@v4
-              with:
-                name: terraform-workflow-logs
-                path: |
-                  logs/tfplan.json
-                  logs/terraform_plan_stdout.log
-                  logs/terraform_plan.log
-                  logs/terraform_plan_stderr.log
-
-            - name: Label PR
-              if: github.event_name == 'pull_request'
-              uses: actions/labeler@v4
-
-
-            
-
-
-# Every push to the main branch will trigger this workflow
-# The workflow will run on the latest version of Ubuntu
-#If formatting is not correct, it will fail the workflow
+      - name: Upload Full Logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-workflow-logs
+          path: |
+            logs/tfplan.json
