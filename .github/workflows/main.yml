@@ -52,7 +52,7 @@ jobs:
             - name: Setup Terraform
               uses: hashicorp/setup-terraform@v3
               with:
-                terraform_version: 1.6.6
+                terraform_version: 1.12.1
 
             - name: Cache Terraform Directory
               uses: actions/cache@v3
@@ -100,7 +100,7 @@ jobs:
 
             - name: Parse tfplan and Send to Slack
               run:
-                python scripts/parse_tfplan.py --input tfplan.json --output plan_output.json
+                python parser/parse_tfplan.py --input tfplan.json --output plan_output.json
 
 
 

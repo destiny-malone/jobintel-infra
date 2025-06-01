@@ -1,6 +1,6 @@
 import os
 import yaml
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 
 def load_config(config_path="config/config.yaml"):
@@ -14,7 +14,7 @@ def load_config(config_path="config/config.yaml"):
         dict: Merged configuration dictionary.
     """
     # Load environment variables from .env file
-    load_dotenv(dotenv_path="config/.env")
+    # load_dotenv(dotenv_path="config/.env")
     # Ensure the config directory exists
     os.makedirs(os.path.dirname(config_path), exist_ok=True)
 
