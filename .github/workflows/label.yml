@@ -8,6 +8,10 @@ jobs:
   label:
     runs-on: ubuntu-latest
     permissions:
+      contents: read
+      issues: write
+      # The labeler action requires write permissions to label pull requests
+      # This is necessary for the labeler action to function correctly
       pull-requests: write
     steps:
       - id: labeler
