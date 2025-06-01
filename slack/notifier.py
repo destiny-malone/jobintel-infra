@@ -1,7 +1,7 @@
 import os
+import sys
 import requests
-from slack_sdk import WebClient
-from slack_sdk.errors import SlackApiError
+
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../utils'))
 from config_loader import load_config
