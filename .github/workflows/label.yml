@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: labeler
-        uses: actions/labeler@v5
+        uses: actions/labeler@v4
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          configuration-path: "labeler.yml"      
+          configuration-path: "config/labeler.yml"

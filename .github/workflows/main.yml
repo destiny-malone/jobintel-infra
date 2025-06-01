@@ -17,6 +17,7 @@ permissions:
   checks: write
   actions: write
   deployments: write
+  # The following permissions are required for the labeler action to work correctly
   # labeler access needs to be set to write for labeling PRs using GitHub Actions/Tokens
 
 env:
