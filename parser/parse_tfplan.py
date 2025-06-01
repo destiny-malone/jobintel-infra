@@ -54,11 +54,17 @@ def parse_tfplan(path=TFPLAN_PATH):
         'delete': []}
 
     for resource in data.get('resource_changes', []):
-        for action in resource.get('change', {}).get('actions', []):
-            resource_type = resource['type']
-            resource_name = resource['name']
-            resource_id = resource.get('change', {}).get('before', {}).get('id', 'unknown')
+        change = resource.get('change', {})
+        if not change:
+            continue # Skip if no changes to resources
+        
+        actions = change.get('actions', [])
+        resource_type = resource.get('type', 'unknown')
+        resource_name = resource.get('name', 'unknown')
+        resource_id = change.get('before', {}).get('id', 'unknown')
 
+
+        for action in actions:
             if action == 'create':
                 resources['create'].append(f"{resource_type}.{resource_name} (ID: {resource_id})")
             elif action == 'update':
